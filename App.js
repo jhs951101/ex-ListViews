@@ -1,39 +1,46 @@
 import React from 'react';
-import { SectionList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
    flex: 1,
    paddingTop: 22
   },
-  sectionHeader: {
-    paddingTop: 2,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 2,
-    fontSize: 14,
-    fontWeight: 'bold',
-    backgroundColor: 'rgba(247,247,247,1.0)',
-  },
   item: {
     padding: 10,
     fontSize: 18,
     height: 44,
   },
-})
+});
 
 function App() {
   return (
     <View style={styles.container}>
-      <SectionList
-        sections={[
-          {title: 'D', data: ['Devin', 'Dan', 'Dominic', 'Domain', 'Dog', 'Dot']},
-          {title: 'J', data: ['Jackson', 'James', 'Jillian', 'Jimmy', 'Joel', 'John', 'Julie', 'Judgements']},
-          {title: 'A', data: ['Apple', 'Ace', 'Ade', 'Ada', 'Agenda']},
+      <FlatList
+        data={[
+          {key: 'Devin', type: 1},
+          {key: 'Dan', type: 1},
+          {key: 'Dominic', type: 2},
+          {key: 'Jackson', type: 1},
+          {key: 'James', type: 1},
+          {key: 'Joel', type: 2},
+          {key: 'John', type: 1},
+          {key: 'Jillian', type: 1},
+          {key: 'Jimmy', type: 3},
+          {key: 'Julie', type: 1},
         ]}
-        renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
-        renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
-        keyExtractor={(item, index) => index}
+        renderItem={({item}) => {
+          if(item.type == 1){
+            return (<Text style={styles.item}>{item.key}</Text>);
+          }
+          else if(item.type == 2){
+            return (<Text style={styles.item}>{item.key} {item.key}</Text>);
+          }
+          else {
+            return (<Text style={styles.item}>{item.key} {item.key} {item.key}</Text>);
+          }
+          
+        }}
       />
     </View>
   );
